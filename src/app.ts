@@ -57,9 +57,7 @@ app.doc('/doc', {
   openapi: '3.1.0',
 });
 
-if (process.env.NODE_ENV === 'development') {
-  const serve = await import('@hono/node-server').then(m => m.serve);
-  serve({ port: 8080, fetch: app.fetch });
-}
+const serve = await import('@hono/node-server').then(m => m.serve);
+serve({ port: parseInt(process.env.PORT || '8080'), fetch: app.fetch });
 
 export default app;
